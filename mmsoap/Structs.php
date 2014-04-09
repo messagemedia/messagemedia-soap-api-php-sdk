@@ -1382,7 +1382,7 @@ class StructCheckUserResponseType extends WsdlClass {
     /**
      * The result
      *
-     * @var anyType
+     * @var StructCheckUserResultType
      */
     public $result;
 
@@ -1443,7 +1443,7 @@ class StructCheckUserResultType extends WsdlClass {
     /**
      * The accountDetails
      *
-     * @var anyType
+     * @var StructAccountDetailsType
      */
     public $accountDetails;
 
@@ -1451,7 +1451,7 @@ class StructCheckUserResultType extends WsdlClass {
      * Constructor method for CheckUserResultType
      *
      * @see parent::__construct()
-     * @param anyType $_accountDetails
+     * @param StructAccountDetailsType $_accountDetails
      * @return StructCheckUserResultType
      */
     public function __construct($_accountDetails = null) {
@@ -1461,7 +1461,7 @@ class StructCheckUserResultType extends WsdlClass {
     /**
      * Get accountDetails value
      *
-     * @return anyType|null
+     * @return StructAccountDetailsType|null
      */
     public function getAccountDetails() {
         return $this->accountDetails;
@@ -1470,8 +1470,8 @@ class StructCheckUserResultType extends WsdlClass {
     /**
      * Set accountDetails value
      *
-     * @param anyType $_accountDetails the accountDetails
-     * @return anyType
+     * @param StructAccountDetailsType $_accountDetails the accountDetails
+     * @return StructAccountDetailsType
      */
     public function setAccountDetails($_accountDetails) {
         return ($this->accountDetails = $_accountDetails);
@@ -2787,7 +2787,7 @@ class StructGetBlockedNumbersResponseType extends WsdlClass {
     /**
      * The result
      *
-     * @var anyType
+     * @var StructGetBlockedNumbersResultType
      */
     public $result;
 
@@ -2795,7 +2795,7 @@ class StructGetBlockedNumbersResponseType extends WsdlClass {
      * Constructor method for GetBlockedNumbersResponseType
      *
      * @see parent::__construct()
-     * @param anyType $_result
+     * @param StructGetBlockedNumbersResultType $_result
      * @return StructGetBlockedNumbersResponseType
      */
     public function __construct($_result = null) {
@@ -2805,7 +2805,7 @@ class StructGetBlockedNumbersResponseType extends WsdlClass {
     /**
      * Get result value
      *
-     * @return anyType|null
+     * @return StructGetBlockedNumbersResultType|null
      */
     public function getResult() {
         return $this->result;
@@ -2814,8 +2814,8 @@ class StructGetBlockedNumbersResponseType extends WsdlClass {
     /**
      * Set result value
      *
-     * @param anyType $_result the result
-     * @return anyType
+     * @param StructGetBlockedNumbersResultType $_result the result
+     * @return StructGetBlockedNumbersResultType
      */
     public function setResult($_result) {
         return ($this->result = $_result);
@@ -2864,7 +2864,7 @@ class StructGetBlockedNumbersResultType extends WsdlClass {
     /**
      * The recipients
      *
-     * @var anyType
+     * @var StructRecipientsType
      */
     public $recipients;
 
@@ -3844,7 +3844,7 @@ class StructRecipientsType extends WsdlClass {
      * Meta informations extracted from the WSDL
      * - maxOccurs : unbounded
      *
-     * @var anyType
+     * @var StructRecipientType
      */
     public $recipient;
 
@@ -4647,7 +4647,7 @@ class StructSendMessagesResponseType extends WsdlClass {
     /**
      * The result
      *
-     * @var anyType
+     * @var StructSendMessagesResultType
      */
     public $result;
 
@@ -4665,7 +4665,7 @@ class StructSendMessagesResponseType extends WsdlClass {
     /**
      * Get result value
      *
-     * @return anyType|null
+     * @return StructSendMessagesResultType|null
      */
     public function getResult() {
         return $this->result;

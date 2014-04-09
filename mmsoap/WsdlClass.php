@@ -26,7 +26,7 @@ class WsdlClass extends stdClass implements ArrayAccess,Iterator,Countable
      * Constant to define the default WSDL URI
      * @var string
      */
-    const VALUE_WSDL_URL = 'http://soap.m4u.com.au/?wsdl';
+    const VALUE_WSDL_URL = 'https://soap.m4u.com.au/?wsdl';
     /**
      * Option key to define WSDL login
      * @var string
@@ -331,7 +331,7 @@ class WsdlClass extends stdClass implements ArrayAccess,Iterator,Countable
     public static function getDefaultWsdlOptions()
     {
         return array(
-                    self::WSDL_CACHE_WSDL=>WSDL_CACHE_BOTH,
+                    self::WSDL_CACHE_WSDL=>WSDL_CACHE_DISK,
                     self::WSDL_COMPRESSION=>null,
                     self::WSDL_CONNECTION_TIMEOUT=>null,
                     self::WSDL_ENCODING=>null,
@@ -345,8 +345,8 @@ class WsdlClass extends stdClass implements ArrayAccess,Iterator,Countable
                     self::WSDL_TYPEMAP=>null,
                     self::WSDL_URL=>self::VALUE_WSDL_URL,
                     self::WSDL_USER_AGENT=>null,
-                    self::WSDL_PROXY_HOST=>'127.0.0.1',
-                    self::WSDL_PROXY_PORT=>'8888',
+                    self::WSDL_PROXY_HOST=>null,
+                    self::WSDL_PROXY_PORT=>null,
                     self::WSDL_PROXY_LOGIN=>null,
                     self::WSDL_PROXY_PASSWORD=>null,
                     self::WSDL_LOCAL_CERT=>null,

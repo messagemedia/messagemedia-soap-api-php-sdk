@@ -2,6 +2,7 @@ messagemedia-php
 ================
 
 Sample PHP code demonstrating how to interact with the MessageMedia SOAP API.
+Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\mmsoap" to speed up requests
 
 **example.php:**
 

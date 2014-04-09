@@ -15,7 +15,7 @@ class ServiceBlock extends WsdlClass {
      */
     public function blockNumbers(StructBlockNumbersRequestType $_structBlockNumbersRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->blockNumbers(array($_structBlockNumbersRequestType)));
+            return $this->setResult(self::getSoapClient()->blockNumbers($_structBlockNumbersRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -53,7 +53,7 @@ class ServiceCheck extends WsdlClass {
      */
     public function checkUser(StructCheckUserRequestType $_structCheckUserRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->checkUser(array($_structCheckUserRequestType)));
+            return $this->setResult(self::getSoapClient()->checkUser($_structCheckUserRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -70,7 +70,7 @@ class ServiceCheck extends WsdlClass {
      */
     public function checkReplies(StructCheckRepliesRequestType $_structCheckRepliesRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->checkReplies(array($_structCheckRepliesRequestType)));
+            return $this->setResult(self::getSoapClient()->checkReplies($_structCheckRepliesRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -87,7 +87,7 @@ class ServiceCheck extends WsdlClass {
      */
     public function checkReports(StructCheckReportsRequestType $_structCheckReportsRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->checkReports(array($_structCheckReportsRequestType)));
+            return $this->setResult(self::getSoapClient()->checkReports($_structCheckReportsRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -125,7 +125,7 @@ class ServiceConfirm extends WsdlClass {
      */
     public function confirmReplies(StructConfirmRepliesRequestType $_structConfirmRepliesRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->confirmReplies(array($_structConfirmRepliesRequestType)));
+            return $this->setResult(self::getSoapClient()->confirmReplies($_structConfirmRepliesRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -142,7 +142,7 @@ class ServiceConfirm extends WsdlClass {
      */
     public function confirmReports(StructConfirmReportsRequestType $_structConfirmReportsRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->confirmReports(array($_structConfirmReportsRequestType)));
+            return $this->setResult(self::getSoapClient()->confirmReports($_structConfirmReportsRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -180,7 +180,7 @@ class ServiceDelete extends WsdlClass {
      */
     public function deleteScheduledMessages(StructDeleteScheduledMessagesRequestType $_structDeleteScheduledMessagesRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->deleteScheduledMessages(array($_structDeleteScheduledMessagesRequestType)));
+            return $this->setResult(self::getSoapClient()->deleteScheduledMessages($_structDeleteScheduledMessagesRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -218,7 +218,7 @@ class ServiceGet extends WsdlClass {
      */
     public function getBlockedNumbers(StructGetBlockedNumbersRequestType $_structGetBlockedNumbersRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->getBlockedNumbers(array($_structGetBlockedNumbersRequestType)));
+            return $this->setResult(self::getSoapClient()->getBlockedNumbers($_structGetBlockedNumbersRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
@@ -294,7 +294,7 @@ class ServiceUnblock extends WsdlClass {
      */
     public function unblockNumbers(StructUnblockNumbersRequestType $_structUnblockNumbersRequestType) {
         try {
-            return $this->setResult(self::getSoapClient()->unblockNumbers(array($_structUnblockNumbersRequestType)));
+            return $this->setResult(self::getSoapClient()->unblockNumbers($_structUnblockNumbersRequestType));
         } catch (SoapFault $soapFault) {
             return !$this->saveLastError(__METHOD__, $soapFault);
         }
