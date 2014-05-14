@@ -1,5 +1,7 @@
 <?php
 /**
+ * PHP MMSoap Example code
+ *
  * Copyright 2014 MessageMedia
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.
@@ -54,10 +56,10 @@ echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result
 
 // Get blocked numbers
 echo "\n** Get Blocked Numbers\n";
-$response = $soap->getBlockedNumbers();
-$result   = $response->getResult();
+$response   = $soap->getBlockedNumbers();
+$result     = $response->getResult();
 $recipients = $result->recipients->recipient;
-if (isset($recipients)){
+if (isset($recipients)) {
     foreach ($recipients as $recipient) {
         echo 'The number ' . $recipient . " is blocked\n";
     }

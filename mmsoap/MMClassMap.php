@@ -2,19 +2,18 @@
 /**
  * File for the class which returns the class map definition
  *
- * @package
- * @date    2014-04-02
- * @author  Jordan Trudgett
- * @version 2
- */
-/**
- * Class which returns the class map definition by the static method MMClassMap::classMap()
+ * Copyright 2014 MessageMedia
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not
+ * use this file except in compliance with the License.
+ * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
  *
- * @package
- * @date    2014-04-02
- * @author  Jordan Trudgett
- * @version 2
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+ * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
+
 class MMClassMap {
     /**
      * This method returns the array containing the mapping between WSDL structs and generated classes

@@ -1,5 +1,7 @@
 <?php
 /**
+ * SoapClient for MMSoap class
+ *
  * Copyright 2014 MessageMedia
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.
@@ -59,21 +61,21 @@ class MMSoapClient extends SoapClient {
         }
 
         foreach ($node->childNodes as $child) {
-            if ($child->nodeName == '_'){
+            if ($child->nodeName == '_') {
                 continue;
             }
 
             $attrElements = array();
 
             if ($child->attributes instanceof Traversable) {
-                foreach($child->attributes as $attr) {
+                foreach ($child->attributes as $attr) {
                     $attrElements[] = $dom->createElement($attr->name, $attr->value);
                 }
             }
 
             $this->reJigNode($dom, $child);
 
-            foreach($attrElements as $attrElement) {
+            foreach ($attrElements as $attrElement) {
                 $child->appendChild($attrElement);
             }
         }
@@ -84,7 +86,7 @@ class MMSoapClient extends SoapClient {
             if ($child->hasAttributes()) {
                 for ($i = $child->attributes->length - 1; $i >= 0; $i--) {
                     if ($child->attributes->item($i)->name == 'type')
-                    $child->removeAttributeNode($child->attributes->item($i));
+                        $child->removeAttributeNode($child->attributes->item($i));
                 }
             }
             if ($child->hasChildNodes()) {
