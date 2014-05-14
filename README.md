@@ -15,7 +15,7 @@ Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\m
     $password  = 'y0urpassw0rd';
     
     // Set up sendMessage parameters
-    $recipient = '61423456789';
+    $recipient = '+61412345678';
     $message   = 'Test from MMSoap.php!';
     
     // Create new MMSoap class

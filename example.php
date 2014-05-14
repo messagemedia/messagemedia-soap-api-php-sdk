@@ -57,6 +57,10 @@ echo "\n** Get Blocked Numbers\n";
 $response = $soap->getBlockedNumbers();
 $result   = $response->getResult();
 $recipients = $result->recipients->recipient;
-foreach ($recipients as $recipient) {
-    echo 'The number ' . $recipient->_ . " is blocked\n";
+if (isset($recipients)){
+    foreach ($recipients as $recipient) {
+        echo 'The number ' . $recipient . " is blocked\n";
+    }
+} else {
+    echo "No numbers in your blocked list\n";
 }
