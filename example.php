@@ -50,7 +50,8 @@ echo $result->accountDetails->creditRemaining . " credits remaining\n";
 // Send messages
 echo "\n** Send Messages\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
-$response = $soap->sendMessages($recipients, $message);
+$scheduled = "2014-07-28T17:10:00";
+$response = $soap->sendMessages($recipients, $message, $scheduled);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
