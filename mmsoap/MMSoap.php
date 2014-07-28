@@ -41,6 +41,7 @@ class MMSoap {
      *
      * @param $to
      * @param $message
+     * @param $scheduled
      * @return StructSendMessagesResponseType
      */
     public function sendMessage($to, $message,$scheduled=null) {
@@ -55,6 +56,7 @@ class MMSoap {
      *
      * @param $recipients
      * @param $message
+     * @param $scheduled
      * @return StructSendMessagesResponseType
      */
     public function sendMessages($recipients, $message, $scheduled=null) {
