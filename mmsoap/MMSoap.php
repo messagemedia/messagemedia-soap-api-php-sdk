@@ -44,11 +44,11 @@ class MMSoap {
      * @param $scheduled
      * @return StructSendMessagesResponseType
      */
-    public function sendMessage($to, $message,$scheduled=null) {
+    public function sendMessage($to, $message, $scheduled=null) {
         if (is_array($to)) {
-            return $this->sendMessages($to, $message,$scheduled);
+            return $this->sendMessages($to, $message, $scheduled);
         }
-        return $this->sendMessages(array($to), $message,$scheduled);
+        return $this->sendMessages(array($to), $message, $scheduled);
     }
 
     /**

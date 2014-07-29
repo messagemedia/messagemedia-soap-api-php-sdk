@@ -50,7 +50,16 @@ echo $result->accountDetails->creditRemaining . " credits remaining\n";
 // Send messages
 echo "\n** Send Messages\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
-$scheduled = "2014-07-28T17:10:00";
+
+// Example of sending a message
+$response = $soap->sendMessages($recipients, $message);
+$result   = $response->getResult();
+echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+
+// Example of sending a message at a scheduled date and time
+echo "\n** Schedule A Message\n"; 
+echo "Scheduling to send '$message' on the 28th July 2016 5:10pm to " . implode(', ', $recipients) . "\n";
+$scheduled = "2016-07-28T17:10:00";
 $response = $soap->sendMessages($recipients, $message, $scheduled);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
