@@ -844,7 +844,7 @@ class WsdlClass extends stdClass implements ArrayAccess, Iterator, Countable {
      *
      * @param string    $_methoName the method called when the error occurred
      * @param SoapFault $_soapFault l'objet de l'erreur
-     * @return bool true|false
+     * @return SoapFault
      */
     protected function saveLastError($_methoName, SoapFault $_soapFault) {
         return ($this->lastError[$_methoName] = $_soapFault);
