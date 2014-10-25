@@ -15,6 +15,9 @@
  */
 
 class MMSoapClient extends SoapClient {
+
+    const SOAP_ENV_NS_URI = 'http://schemas.xmlsoap.org/soap/envelope/';
+
     public function __construct($wsdl, $options = null) {
         parent::__construct($wsdl, $options);
     }
@@ -46,6 +49,12 @@ class MMSoapClient extends SoapClient {
     public function reJig($response) {
         $responseDom = new DOMDocument('1.0');
         $responseDom->loadXML($response);
+
+        // Don't rejig SOAP Fault responses.
+        if ($responseDom->getElementsByTagNameNS(self::SOAP_ENV_NS_URI, 'Fault')->length > 0) {
+            return $response;
+        }
+
         $this->reJigNode($responseDom, $responseDom->documentElement);
         return $responseDom->saveXML();
     }

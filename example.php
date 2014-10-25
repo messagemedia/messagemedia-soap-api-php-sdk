@@ -42,6 +42,9 @@ $soap = new MMSoap($username, $password, $options);
 // Check user info
 echo "\n** User Info\n";
 $response       = $soap->getUserInfo();
+if ($response instanceof SoapFault) {
+    exit('Error: ' . $response->getMessage());
+}
 $result         = $response->getResult();
 $accountDetails = $result->accountDetails;
 echo 'Account type: ' . $accountDetails->type . "\n";
@@ -57,7 +60,7 @@ $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
 // Example of sending a message at a scheduled date and time
-echo "\n** Schedule A Message\n"; 
+echo "\n** Schedule A Message\n";
 echo "Scheduling to send '$message' on the 28th July 2016 5:10pm to " . implode(', ', $recipients) . "\n";
 $scheduled = "2016-07-28T17:10:00";
 $response = $soap->sendMessages($recipients, $message, $scheduled);

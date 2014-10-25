@@ -22,13 +22,13 @@ class ServiceBlock extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructBlockNumbersRequestType $_structBlockNumbersRequestType
-     * @return StructBlockNumbersResponseType
+     * @return StructBlockNumbersResponseType|SoapFault
      */
     public function blockNumbers(StructBlockNumbersRequestType $_structBlockNumbersRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->blockNumbers($_structBlockNumbersRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -60,13 +60,13 @@ class ServiceCheck extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructCheckUserRequestType $_structCheckUserRequestType
-     * @return StructCheckUserResponseType
+     * @return StructCheckUserResponseType|SoapFault
      */
     public function checkUser(StructCheckUserRequestType $_structCheckUserRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->checkUser($_structCheckUserRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -77,13 +77,13 @@ class ServiceCheck extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructCheckRepliesRequestType $_structCheckRepliesRequestType
-     * @return StructCheckRepliesResponseType
+     * @return StructCheckRepliesResponseType|SoapFault
      */
     public function checkReplies(StructCheckRepliesRequestType $_structCheckRepliesRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->checkReplies($_structCheckRepliesRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -94,13 +94,13 @@ class ServiceCheck extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructCheckReportsRequestType $_structCheckReportsRequestType
-     * @return StructCheckReportsResponseType
+     * @return StructCheckReportsResponseType|SoapFault
      */
     public function checkReports(StructCheckReportsRequestType $_structCheckReportsRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->checkReports($_structCheckReportsRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -132,13 +132,13 @@ class ServiceConfirm extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructConfirmRepliesRequestType $_structConfirmRepliesRequestType
-     * @return StructConfirmRepliesResponseType
+     * @return StructConfirmRepliesResponseType|SoapFault
      */
     public function confirmReplies(StructConfirmRepliesRequestType $_structConfirmRepliesRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->confirmReplies($_structConfirmRepliesRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -149,13 +149,13 @@ class ServiceConfirm extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructConfirmReportsRequestType $_structConfirmReportsRequestType
-     * @return StructConfirmReportsResponseType
+     * @return StructConfirmReportsResponseType|SoapFault
      */
     public function confirmReports(StructConfirmReportsRequestType $_structConfirmReportsRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->confirmReports($_structConfirmReportsRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -187,13 +187,13 @@ class ServiceDelete extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructDeleteScheduledMessagesRequestType $_structDeleteScheduledMessagesRequestType
-     * @return StructDeleteScheduledMessagesResponseType
+     * @return StructDeleteScheduledMessagesResponseType|SoapFault
      */
     public function deleteScheduledMessages(StructDeleteScheduledMessagesRequestType $_structDeleteScheduledMessagesRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->deleteScheduledMessages($_structDeleteScheduledMessagesRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -225,13 +225,13 @@ class ServiceGet extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructGetBlockedNumbersRequestType $_structGetBlockedNumbersRequestType
-     * @return StructGetBlockedNumbersResponseType
+     * @return StructGetBlockedNumbersResponseType|SoapFault
      */
     public function getBlockedNumbers(StructGetBlockedNumbersRequestType $_structGetBlockedNumbersRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->getBlockedNumbers($_structGetBlockedNumbersRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -263,13 +263,13 @@ class ServiceSend extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructSendMessagesRequestType $_structSendMessagesRequestType
-     * @return StructSendMessagesResponseType
+     * @return StructSendMessagesResponseType|SoapFault
      */
     public function sendMessages(StructSendMessagesRequestType $_structSendMessagesRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->sendMessages($_structSendMessagesRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
@@ -301,13 +301,13 @@ class ServiceUnblock extends WsdlClass {
      * @uses WsdlClass::setResult()
      * @uses WsdlClass::saveLastError()
      * @param StructUnblockNumbersRequestType $_structUnblockNumbersRequestType
-     * @return StructUnblockNumbersResponseType
+     * @return StructUnblockNumbersResponseType|SoapFault
      */
     public function unblockNumbers(StructUnblockNumbersRequestType $_structUnblockNumbersRequestType) {
         try {
             return $this->setResult(self::getSoapClient()->unblockNumbers($_structUnblockNumbersRequestType));
         } catch (SoapFault $soapFault) {
-            return !$this->saveLastError(__METHOD__, $soapFault);
+            return $this->saveLastError(__METHOD__, $soapFault);
         }
     }
 
