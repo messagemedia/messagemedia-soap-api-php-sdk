@@ -24,8 +24,9 @@ $username = 'YourUserName001';
 $password = 'y0urpassw0rd';
 
 // Set up sendMessage parameters
-$recipients = array('+61412345678');
-$origin      = "+61412345678";
+// http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
+$recipients = array('+61491570156');
+$origin     =       "+61491570157";
 $message    = 'Hello from messagemedia-php!';
 
 // Set up SOAP Options
