@@ -89,7 +89,7 @@ class MMSoap {
     }
 
     /**
-    * Fet the blocked numbers for the customer/account
+    * Get the blocked numbers for the customer/account
     * 
      * @return Array    Array of blocked numbers 
     */
