@@ -25,6 +25,7 @@ $password = 'y0urpassw0rd';
 
 // Set up sendMessage parameters
 $recipients = array('+61412345678');
+$origin      = "+61412345678";
 $message    = 'Hello from messagemedia-php!';
 
 // Set up SOAP Options
@@ -55,7 +56,7 @@ echo "\n** Send Messages\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
 // Example of sending a message
-$response = $soap->sendMessages($recipients, $message);
+$response = $soap->sendMessages($recipients, $message, null, $origin);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
@@ -63,7 +64,7 @@ echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result
 echo "\n** Schedule A Message\n";
 echo "Scheduling to send '$message' on the 28th July 2016 5:10pm to " . implode(', ', $recipients) . "\n";
 $scheduled = "2016-07-28T17:10:00";
-$response = $soap->sendMessages($recipients, $message, $scheduled);
+$response = $soap->sendMessages($recipients, $message, $scheduled, $origin);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 

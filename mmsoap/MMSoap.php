@@ -44,11 +44,11 @@ class MMSoap {
      * @param $scheduled
      * @return StructSendMessagesResponseType
      */
-    public function sendMessage($to, $message, $scheduled=null) {
+    public function sendMessage($to, $message, $scheduled=null, $origin=null) {
         if (is_array($to)) {
-            return $this->sendMessages($to, $message, $scheduled);
+            return $this->sendMessages($to, $message, $scheduled, $origin);
         }
-        return $this->sendMessages(array($to), $message, $scheduled);
+        return $this->sendMessages(array($to), $message, $scheduled, $origin);
     }
 
     /**
@@ -59,7 +59,7 @@ class MMSoap {
      * @param $scheduled
      * @return StructSendMessagesResponseType
      */
-    public function sendMessages($recipients, $message, $scheduled=null) {
+    public function sendMessages($recipients, $message, $scheduled=null, $origin=null) {
         $recipientsStruct = array();
 
         foreach ($recipients as $recipient) {
@@ -67,7 +67,7 @@ class MMSoap {
         }
 
         $msgList = array(new StructMessageType(
-            null,
+            $origin,
             new StructRecipientsType($recipientsStruct),
             $message,
             $scheduled
