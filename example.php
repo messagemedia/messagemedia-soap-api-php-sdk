@@ -24,8 +24,13 @@ $username = 'YourUserName001';
 $password = 'y0urpassw0rd';
 
 // Set up sendMessage parameters
-$recipients = array('+61412345678');
+// http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
+$recipients = array('+61491570156');
+$origin     =       "+61491570157";
 $message    = 'Hello from messagemedia-php!';
+
+// for scheduled messages lets schedule a message 1 minte in the future
+$oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , date("d"), date("Y"));
 
 // Set up SOAP Options
 $options = array( // Put options here to override defaults
@@ -50,8 +55,8 @@ $accountDetails = $result->accountDetails;
 echo 'Account type: ' . $accountDetails->type . "\n";
 echo $result->accountDetails->creditRemaining . " credits remaining\n";
 
-// Send messages
-echo "\n** Send Messages\n";
+// Send messages using rotary
+echo "\n** Send Messages using rotary\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
 // Example of sending a message
@@ -59,13 +64,24 @@ $response = $soap->sendMessages($recipients, $message);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
-// Example of sending a message at a scheduled date and time
-echo "\n** Schedule A Message\n";
-echo "Scheduling to send '$message' on the 28th July 2016 5:10pm to " . implode(', ', $recipients) . "\n";
-$scheduled = "2016-07-28T17:10:00";
-$response = $soap->sendMessages($recipients, $message, $scheduled);
+// Send messages using a source number
+echo "\n** Send Messages using a source number.\n";
+echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
+
+// Example of sending a message
+$response = $soap->sendMessages($recipients, $message, null, $origin);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+
+// Example of sending a message at a scheduled date and time
+/*echo "\n** Schedule A Message\n";
+echo "Scheduling to send '$message' on ".date('l jS \of F Y h:iA',$oneMinuteInTheFuture)." to " . implode(', ', $recipients) . "\n";
+// This is an example of the date format $scheduled = "2016-07-28T17:10:00";
+$scheduled = date('Y-m-j\TG:i:s',$oneMinuteInTheFuture);
+$response = $soap->sendMessages($recipients, $message, $scheduled, $origin);
+$result   = $response->getResult();
+echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+*/
 
 // Get blocked numbers
 echo "\n** Get Blocked Numbers\n";
