@@ -43,6 +43,8 @@ class MMSoap {
      * @param $message     The message
      * @param $scheduled   When the message should be scheduled for, null = now
      * @param $origin      Origin phone number that the message will come from
+     *                     if no origin number is set(null), the messagemedia rotary 
+     *                     will be used so that message replies are correctly routed 
      *
      * @return StructSendMessagesResponseType
      */
@@ -60,6 +62,8 @@ class MMSoap {
      * @param $message     The message
      * @param $scheduled   When the message should be scheduled for, null = now
      * @param $origin      Origin phone number that the message will come from
+     *                     if no origin number is set(null), the messagemedia rotary 
+     *                     will be used so that message replies are correctly routed 
      *
      * @return StructSendMessagesResponseType
      */
