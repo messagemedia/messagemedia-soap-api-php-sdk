@@ -39,9 +39,11 @@ class MMSoap {
     /**
      * Send a single message to one recipient
      *
-     * @param $to
-     * @param $message
-     * @param $scheduled
+     * @param $to          The recipient number
+     * @param $message     The message
+     * @param $scheduled   When the message should be scheduled for, null = now
+     * @param $origin      Origin phone number that the message will come from
+     *
      * @return StructSendMessagesResponseType
      */
     public function sendMessage($to, $message, $scheduled=null, $origin=null) {
@@ -54,9 +56,11 @@ class MMSoap {
     /**
      * Send a single message to multiple recipients
      *
-     * @param $recipients
-     * @param $message
-     * @param $scheduled
+     * @param $recipients  An array of the recipient phone numbers
+     * @param $message     The message
+     * @param $scheduled   When the message should be scheduled for, null = now
+     * @param $origin      Origin phone number that the message will come from
+     *
      * @return StructSendMessagesResponseType
      */
     public function sendMessages($recipients, $message, $scheduled=null, $origin=null) {
@@ -80,6 +84,11 @@ class MMSoap {
         return $this->serviceSend->sendMessages($sendRequest);
     }
 
+    /**
+    * Fet the blocked numbers for the customer/account
+    * 
+     * @return Array    Array of blocked numbers 
+    */
     public function getBlockedNumbers() {
         $requestBody = new StructGetBlockedNumbersBodyType(5);
         $getRequest  = new StructGetBlockedNumbersRequestType($this->authentication, $requestBody);
