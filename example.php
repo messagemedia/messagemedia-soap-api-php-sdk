@@ -32,6 +32,13 @@ $message    = 'Hello from messagemedia-php!';
 // for scheduled messages lets schedule a message 1 minte in the future
 $oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , date("d"), date("Y"));
 
+// Capture the wsdl host
+//$host = parse_url(WsdlClass::VALUE_WSDL_URL, PHP_URL_HOST);
+
+// Set up stream context Server Name Indication (SNI) for use with proxy and HTTPS
+//$opts = array('ssl' => array('SNI_server_name' => $host,'SNI_enabled' => TRUE));
+//$context = stream_context_create($opts);
+
 // Set up SOAP Options
 $options = array( // Put options here to override defaults
     // Example Proxy Options
@@ -39,6 +46,9 @@ $options = array( // Put options here to override defaults
     //WsdlClass::WSDL_PROXY_HOST => '127.0.0.1',
     //WsdlClass::WSDL_PROXY_PORT => '8888'
 
+    //WsdlClass::WSDL_PROXY_LOGIN => 'proxyUsername',
+    //WsdlClass::WSDL_PROXY_PASSWORD => 'proxyPassword',
+    //WsdlClass::WSDL_STREAM_CONTEXT => $context //If you require SNI
 );
 
 // Create new MMSoap class
