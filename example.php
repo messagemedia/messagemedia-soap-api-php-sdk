@@ -32,8 +32,8 @@ $message    = 'Hello from messagemedia-php!';
 // for scheduled messages lets schedule a message 1 minte in the future
 $oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , date("d"), date("Y"));
 
-// capture the wsdl host
-$host = parse_url(WsdlClass::VALUE_WSDL_URL, PHP_URL_HOST);
+// Capture the wsdl host
+//$host = parse_url(WsdlClass::VALUE_WSDL_URL, PHP_URL_HOST);
 
 // Set up stream context Server Name Indication (SNI) for use with proxy and HTTPS
 //$opts = array('ssl' => array('SNI_server_name' => $host,'SNI_enabled' => TRUE));
