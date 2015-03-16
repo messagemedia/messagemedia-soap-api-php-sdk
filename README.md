@@ -3,10 +3,10 @@ This library provides a simple interface for sending and receiving messages usin
 
 If you have any issue using this sample code, or would like to report a defect, you could [create a new Issue](https://github.com/messagemedia/messagemedia-php/issues/new) in Github or [Contact us](http://www.messagemedia.com.au/contact-us).
 
-## Installation:
+## Installation
 Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\mmsoap" to speed up requests
 
-## Usage:
+## Usage
 **example.php:**
 
     <?php
@@ -30,7 +30,6 @@ Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\m
     $soap->sendMessage($recipient, $message, null, $origin);
 
 ## Contributing
-
 We welcome contributions from our users. Contributing is easy:
 
   1.  Fork this repo
