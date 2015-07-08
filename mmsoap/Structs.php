@@ -3644,13 +3644,13 @@ class StructMessageType extends WsdlClass {
      * @param string                $_content
      * @param dateTime              $_scheduled
      * @param boolean               $_deliveryReport
+     * @param unsignedInt           $_sequenceNumber
      * @param unsignedByte          $_validityPeriod
      * @param anyType               $_tags
      * @param EnumMessageFormatType $_format
-     * @param unsignedInt           $_sequenceNumber
      * @return StructMessageType
      */
-    public function __construct($_origin = null, $_recipients = null, $_content = null, $_scheduled = null, $_deliveryReport = false, $_validityPeriod = 169, $_tags = null, $_format = 'SMS', $_sequenceNumber = 0) {
+    public function __construct($_origin = null, $_recipients = null, $_content = null, $_scheduled = null, $_deliveryReport = false, $_sequenceNumber = 0, $_validityPeriod = 169, $_tags = null, $_format = 'SMS') {
         parent::__construct(array('origin' => $_origin, 'recipients' => $_recipients, 'content' => $_content, 'scheduled' => $_scheduled, 'deliveryReport' => $_deliveryReport, 'validityPeriod' => $_validityPeriod, 'tags' => $_tags, 'format' => $_format, 'sequenceNumber' => $_sequenceNumber), false);
     }
 

@@ -61,6 +61,7 @@ if ($response instanceof SoapFault) {
     exit('Error: ' . $response->getMessage());
 }
 $result         = $response->getResult();
+
 $accountDetails = $result->accountDetails;
 echo 'Account type: ' . $accountDetails->type . "\n";
 echo $result->accountDetails->creditRemaining . " credits remaining\n";
@@ -78,8 +79,18 @@ echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result
 echo "\n** Send Messages using a source number.\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
-// Example of sending a message
-$response = $soap->sendMessages($recipients, $message, null, $origin);
+
+// Set this to true to request a DR, please note this will incur an additional charge
+$messageId = 1239812;
+$deliveryReceipt = false;
+if ($deliveryReceipt){
+    echo "Request delivery Receipt.\n";
+}
+echo "Setting messageId to " . $messageId . "\n";
+
+
+// Example of sending a message with a Delivery Receipt request and setting the message Id (1239812)
+$response = $soap->sendMessages($recipients, $message, null, $origin, $deliveryReceipt, $messageId);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
@@ -94,14 +105,17 @@ echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result
 */
 
 // Get blocked numbers
-echo "\n** Get Blocked Numbers\n";
+// echo "\n** Get Blocked Numbers\n";
 $response   = $soap->getBlockedNumbers();
 $result     = $response->getResult();
-$recipients = $result->recipients->recipient;
-if (isset($recipients)) {
-    foreach ($recipients as $recipient) {
-        echo 'The number ' . $recipient . " is blocked\n";
+
+if (array_key_exists('recipients', $result)) {
+    $recipients = $result->recipients->recipient;
+    if (isset($recipients)) {
+        foreach ($recipients as $recipient) {
+            echo 'The number ' . $recipient . " is blocked\n";
+        }
+    } else {
+         echo "No numbers in your blocked list\n";
     }
-} else {
-    echo "No numbers in your blocked list\n";
 }
