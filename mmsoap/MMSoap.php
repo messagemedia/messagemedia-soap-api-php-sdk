@@ -64,10 +64,12 @@ class MMSoap {
      * @param $origin      Origin phone number that the message will come from
      *                     if no origin number is set(null), the messagemedia rotary 
      *                     will be used so that message replies are correctly routed 
-     *
+     * @param $deliveryReport   When set to true, this will request a receipt as to whether
+     *                          the message was delivered or not to the gateway.
+     * @param $sequenceNumber   This is the messageId associated to a batch message.
      * @return StructSendMessagesResponseType
      */
-    public function sendMessages($recipients, $message, $scheduled=null, $origin=null) {
+    public function sendMessages($recipients, $message, $scheduled=null, $origin=null, $deliveryReport=false, $sequenceNumber=0) {
         $recipientsStruct = array();
 
         foreach ($recipients as $recipient) {
@@ -78,7 +80,9 @@ class MMSoap {
             $origin,
             new StructRecipientsType($recipientsStruct),
             $message,
-            $scheduled
+            $scheduled,
+            $deliveryReport,
+            $sequenceNumber
         ));
 
         $messages    = new StructMessageListType($msgList);
