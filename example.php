@@ -55,7 +55,7 @@ $options = array( // Put options here to override defaults
 $soap = new MMSoap($username, $password, $options);
 
 // Check user info
-// echo "\n** User Info\n";
+echo "\n** User Info\n";
 $response       = $soap->getUserInfo();
 if ($response instanceof SoapFault) {
     exit('Error: ' . $response->getMessage());
@@ -73,7 +73,7 @@ echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 // Example of sending a message
 $response = $soap->sendMessages($recipients, $message);
 $result   = $response->getResult();
-// echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
 // Send messages using a source number
 echo "\n** Send Messages using a source number.\n";
