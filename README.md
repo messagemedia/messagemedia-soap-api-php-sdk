@@ -22,12 +22,28 @@ Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\m
     $origin     =       "+61491570157";
 
     $message   = 'Hello from messagemedia-php!';
+
+    // Set up stream context Server Name Indication (SNI) for use with proxy and HTTPS
+    //$opts = array('ssl' => array('SNI_server_name' => $host,'SNI_enabled' => TRUE));
+    //$context = stream_context_create($opts);
+
+    // Set up SOAP Options
+    $options = array( // Put options here to override defaults
+            // Example Proxy Options
+
+            //WsdlClass::WSDL_PROXY_HOST => '127.0.0.1',
+            //WsdlClass::WSDL_PROXY_PORT => '8888'
+
+            //WsdlClass::WSDL_PROXY_LOGIN => 'proxyUsername',
+            //WsdlClass::WSDL_PROXY_PASSWORD => 'proxyPassword',
+            //WsdlClass::WSDL_STREAM_CONTEXT => $context //If you require SNI
+    );
     
     // Create new MMSoap class
-    $soap = new MMSoap($username, $password);
-    
+    $soap = new MMSoap($username, $password, $options);
+
     // Send a message
-    $soap->sendMessage($recipient, $message, null, $origin);
+    $soap->sendMessage($recipients, $message, null, $origin);
 
 ## Contributing
 We welcome contributions from our users. Contributing is easy:
