@@ -28,7 +28,7 @@ Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\m
     
     // Send a message
     $soap->sendMessage($recipient, $message, null, $origin);
-
+!inc(example.php)
 ## Contributing
 We welcome contributions from our users. Contributing is easy:
 
