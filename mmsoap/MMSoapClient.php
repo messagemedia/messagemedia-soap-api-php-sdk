@@ -22,7 +22,7 @@ class MMSoapClient extends SoapClient {
         parent::__construct($wsdl, $options);
     }
 
-    public function __doRequest($request, $location, $action, $version) {
+    public function __doRequest($request, $location, $action, $version, $one_way = 0) {
         $dom = new DOMDocument('1.0');
 
         // loads the SOAP request to the Document
