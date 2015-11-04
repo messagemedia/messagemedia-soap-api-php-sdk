@@ -29,7 +29,7 @@ $password = 'y0urpassw0rd';
 $recipients = array('+61491570156');
 $messageIds = array('24');
 $origin     =       "+61491570157";
-$message    = 'Hello from messagemedia-php!';
+$message    = 'Hello from messagemedia-php to recipient: '. $recipients[0] .' and setting messageId to: '. $messageIds[0];
 
 
 // for scheduled messages lets schedule a message 1 minte in the future
@@ -74,7 +74,7 @@ echo "\n** Send Messages using rotary\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
 // Example of sending a message
-$response = $soap->sendMessages($recipients, $message);
+$response = $soap->sendMessages($recipients, $message, null, null, false, 0, $messageIds);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
