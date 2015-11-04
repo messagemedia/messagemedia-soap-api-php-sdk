@@ -23,13 +23,13 @@ require('mmsoap/MMSoap.php');
 $username = 'YourUserName001';
 $password = 'y0urpassw0rd';
 
-
 // Set up sendMessage parameters
 // http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
 $recipients = array('+61491570156');
+// MessageId array matches each recipient. i.e. 61414458865 will match 24.
 $messageIds = array('24');
 $origin     =       "+61491570157";
-$message    = 'Hello from messagemedia-php to recipient: '. $recipients[0] .' and setting messageId to: '. $messageIds[0];
+$message    = 'Hello from messagemedia-php!';
 
 
 // for scheduled messages lets schedule a message 1 minte in the future
@@ -74,13 +74,13 @@ echo "\n** Send Messages using rotary\n";
 echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
 // Example of sending a message
-$response = $soap->sendMessages($recipients, $message, null, null, false, 0, $messageIds);
+$response = $soap->sendMessages($recipients, $message);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
 // Send messages using a source number
-echo "\n** Send Messages using a source number.\n";
-echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
+echo "\n** Send Messages using a source number and setting Message id.\n";
+echo "Sending '$message' to " . implode(', ', $recipients) . " with sourceNumber: $origin and messageId: $messageIds[0]\n";
 
 
 // Set this to true to request a DR, please note this will incur an additional charge
