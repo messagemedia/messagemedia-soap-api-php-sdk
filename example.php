@@ -23,11 +23,14 @@ require('mmsoap/MMSoap.php');
 $username = 'YourUserName001';
 $password = 'y0urpassw0rd';
 
+
 // Set up sendMessage parameters
 // http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
 $recipients = array('+61491570156');
+$messageIds = array('24');
 $origin     =       "+61491570157";
 $message    = 'Hello from messagemedia-php!';
+
 
 // for scheduled messages lets schedule a message 1 minte in the future
 $oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , date("d"), date("Y"));
@@ -81,16 +84,14 @@ echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
 
 
 // Set this to true to request a DR, please note this will incur an additional charge
-$messageId = 1239812;
+$sequenceId = 1239812;
 $deliveryReceipt = false;
 if ($deliveryReceipt){
     echo "Request delivery Receipt.\n";
 }
-echo "Setting messageId to " . $messageId . "\n";
 
-
-// Example of sending a message with a Delivery Receipt request and setting the message Id (1239812)
-$response = $soap->sendMessages($recipients, $message, null, $origin, $deliveryReceipt, $messageId);
+// Example of sending a message with a Delivery Receipt request and setting the sequenceId (1239812) and messageId (24)
+$response = $soap->sendMessages($recipients, $message, null, $origin, $deliveryReceipt, $sequenceId, $messageIds);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 

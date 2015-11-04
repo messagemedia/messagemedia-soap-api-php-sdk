@@ -69,11 +69,15 @@ class MMSoap {
      * @param $sequenceNumber   This is the messageId associated to a batch message.
      * @return StructSendMessagesResponseType
      */
-    public function sendMessages($recipients, $message, $scheduled=null, $origin=null, $deliveryReport=false, $sequenceNumber=0) {
+    public function sendMessages($recipients, $message, $scheduled=null, $origin=null, $deliveryReport=false, $sequenceNumber=0, $messageIds=array()) {
         $recipientsStruct = array();
 
-        foreach ($recipients as $recipient) {
-            $recipientsStruct[] = new StructRecipientType($recipient);
+        for ($i=0; $i<sizeof($recipients); $i++) {
+            if (!empty($messageIds)) {
+                $recipientsStruct[] = new StructRecipientType($recipients[$i], $messageIds[$i]);
+            } else {
+                $recipientsStruct[] = new StructRecipientType($recipients[$i]);
+            }
         }
 
         $msgList = array(new StructMessageType(

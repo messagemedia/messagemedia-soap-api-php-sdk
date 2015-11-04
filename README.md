@@ -19,6 +19,7 @@ Windows users: set soap.wsdl_cache_dir in `php.ini` to something like "C:\temp\m
     
     // Set up sendMessage parameters
     $recipients = array('+61491570156');
+	$messageIds = array('24');
     $origin     =       "+61491570157";
 
     $message   = 'Hello from messagemedia-php!';
