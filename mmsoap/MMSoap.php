@@ -116,8 +116,7 @@ class MMSoap {
      * @param $numbersToBlock an array of strings containing the numbers to block
      * @return StructBlockNumbersResponseType
      */
-    public function blockNumbers(array $numbersToBlock)
-    {
+    public function blockNumbers(array $numbersToBlock) {
         $requestBody = new StructBlockNumbersBodyType($this->stringNumberArrayToRecipientsType($numbersToBlock));
         $request = new StructBlockNumbersRequestType($this->authentication, $requestBody);
         return $this->serviceBlock->blockNumbers($request);
@@ -129,15 +128,13 @@ class MMSoap {
      * @param $numbersToUnblock an array of strings containing the numbers to unblock
      * @return StructUnblockNumbersResponseType
      */
-    public function unblockNumbers(array $numbersToUnblock)
-    {
+    public function unblockNumbers(array $numbersToUnblock) {
         $requestBody = new StructUnblockNumbersBodyType($this->stringNumberArrayToRecipientsType($numbersToUnblock));
         $request = new StructUnblockNumbersRequestType($this->authentication, $requestBody);
         return $this->serviceUnblock->unblockNumbers($request);
     }
 
-    private function stringNumberArrayToRecipientsType(array $stringNumberArray)
-    {
+    private function stringNumberArrayToRecipientsType(array $stringNumberArray) {
         $result = array();
         foreach ($stringNumberArray as $each) {
             $result[] = new StructRecipientType($each);
@@ -150,8 +147,7 @@ class MMSoap {
      * @param $maximumReplies the amount of replies to receive, defaults to 100 (optional)
      * @return StructCheckRepliesResponseType
      */
-    public function getReplies($maximumReplies = 100)
-    {
+    public function getReplies($maximumReplies = 100) {
     	$body = new StructCheckRepliesBodyType($maximumReplies);
         $request = new StructCheckRepliesRequestType($this->authentication, $body);
         return $this->serviceCheck->checkReplies($request);
@@ -162,8 +158,7 @@ class MMSoap {
      * @param $maximumReports the amount of reports to receive, defaults to 100 (optional)
      * @return StructCheckReportsResponseType
      */
-    public function getReports($maximumReports = 100)
-    {
+    public function getReports($maximumReports = 100) {
     	$body = new StructCheckReportsBodyType($maximumReports);
     	$request = new StructCheckReportsRequestType($this->authentication, $body);
     	return $this->serviceCheck->checkReports($request);

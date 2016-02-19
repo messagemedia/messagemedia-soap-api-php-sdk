@@ -46,8 +46,7 @@ $options = array( // Put options here to override defaults
 // Create new MMSoap class
 $soap = new MMSoap($username, $password, $options);
 
-function getBlockedNumbers($soap)
-{
+function getBlockedNumbers($soap) {
     // Get blocked numbers
     echo "** Get Blocked Numbers\n";
     $response = $soap->getBlockedNumbers();
@@ -77,8 +76,7 @@ function getBlockedNumbers($soap)
     echo "\n";
 }
 
-function blockNumbers($soap, $numberToBlock)
-{
+function blockNumbers($soap, $numberToBlock) {
     echo "** Block " . implode($numberToBlock,", ") . "\n";
 
     $response = $soap->blockNumbers($numberToBlock);
@@ -89,8 +87,7 @@ function blockNumbers($soap, $numberToBlock)
     echo "Blocked: " . $result->blocked . " Failed: " . $result->failed . "\n\n";
 }
 
-function unblockNumbers($soap, $numberToBlock)
-{
+function unblockNumbers($soap, $numberToBlock) {
     echo "** Unblock " . implode($numberToBlock, ", ") . "\n";
     $response = $soap->unblockNumbers($numberToBlock);
     if ($response instanceof SoapFault) {
