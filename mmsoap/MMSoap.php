@@ -2,7 +2,7 @@
 /**
  * MMSoap class for interactive with MessageMedia's SOAP API
  *
- * Copyright 2014 MessageMedia
+ * Copyright 2014-2016 MessageMedia
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -22,6 +22,9 @@ class MMSoap {
         $this->serviceCheck = new ServiceCheck($options);
         $this->serviceGet   = new ServiceGet($options);
         $this->serviceSend  = new ServiceSend($options);
+        $this->serviceBlock = new ServiceBlock($options);
+        $this->serviceUnblock = new ServiceUnblock($options);
+        $this->serviceConfirm = new ServiceConfirm($options);
 
         // Authentication object
         $this->authentication = new StructAuthenticationType($userId, $password);
@@ -105,5 +108,59 @@ class MMSoap {
         $requestBody = new StructGetBlockedNumbersBodyType(5);
         $getRequest  = new StructGetBlockedNumbersRequestType($this->authentication, $requestBody);
         return $this->serviceGet->getBlockedNumbers($getRequest);
+    }
+
+    /**
+     * Block numbers for the customer/account
+     *
+     * @param $numbersToBlock an array of strings containing the numbers to block
+     * @return StructBlockNumbersResponseType
+     */
+    public function blockNumbers(array $numbersToBlock) {
+        $requestBody = new StructBlockNumbersBodyType($this->stringNumberArrayToRecipientsType($numbersToBlock));
+        $request = new StructBlockNumbersRequestType($this->authentication, $requestBody);
+        return $this->serviceBlock->blockNumbers($request);
+    }
+
+    /**
+     * Unblock numbers for the customer/account
+     *
+     * @param $numbersToUnblock an array of strings containing the numbers to unblock
+     * @return StructUnblockNumbersResponseType
+     */
+    public function unblockNumbers(array $numbersToUnblock) {
+        $requestBody = new StructUnblockNumbersBodyType($this->stringNumberArrayToRecipientsType($numbersToUnblock));
+        $request = new StructUnblockNumbersRequestType($this->authentication, $requestBody);
+        return $this->serviceUnblock->unblockNumbers($request);
+    }
+
+    private function stringNumberArrayToRecipientsType(array $stringNumberArray) {
+        $result = array();
+        foreach ($stringNumberArray as $each) {
+            $result[] = new StructRecipientType($each);
+        }
+        return new StructRecipientsType($result);
+    }
+
+    /**
+     * Check for replies.
+     * @param $maximumReplies the amount of replies to receive, defaults to 100 (optional)
+     * @return StructCheckRepliesResponseType
+     */
+    public function getReplies($maximumReplies = 100) {
+    	$body = new StructCheckRepliesBodyType($maximumReplies);
+        $request = new StructCheckRepliesRequestType($this->authentication, $body);
+        return $this->serviceCheck->checkReplies($request);
+    }
+    
+    /**
+     * Check for delivery reports.
+     * @param $maximumReports the amount of reports to receive, defaults to 100 (optional)
+     * @return StructCheckReportsResponseType
+     */
+    public function getReports($maximumReports = 100) {
+    	$body = new StructCheckReportsBodyType($maximumReports);
+    	$request = new StructCheckReportsRequestType($this->authentication, $body);
+    	return $this->serviceCheck->checkReports($request);
     }
 }

@@ -2,7 +2,7 @@
 /**
  * PHP MMSoap Example code
  *
- * Copyright 2014 MessageMedia
+ * Copyright 2016 MessageMedia
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License.
  * You may obtain a copy of the License at http://www.apache.org/licenses/LICENSE-2.0
@@ -26,10 +26,9 @@ $password = 'y0urpassw0rd';
 // Set up sendMessage parameters
 // http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
 $recipients = array('+61491570156');
-// MessageId array matches each recipient. i.e. 61414458865 will match 24.
+// MessageId array matches each recipient. i.e. 61491570156 will match 24.
 $messageIds = array('24');
 $origin     =       "+61491570157";
-$message    = 'Hello from messagemedia-php!';
 
 
 // for scheduled messages lets schedule a message 1 minte in the future
@@ -57,66 +56,29 @@ $options = array( // Put options here to override defaults
 // Create new MMSoap class
 $soap = new MMSoap($username, $password, $options);
 
-// Check user info
-echo "\n** User Info\n";
-$response       = $soap->getUserInfo();
+// Send a simple message
+$recipient = $recipients[0];
+echo "\n** Send Messages\n";
+echo "Sending message to $recipient\n";
+$response = $soap->sendMessage($recipient, "messagemedia-php: simple message");
 if ($response instanceof SoapFault) {
-    exit('Error: ' . $response->getMessage());
+	exit ( 'Error: ' . $response->getMessage () );
 }
-$result         = $response->getResult();
-
-$accountDetails = $result->accountDetails;
-echo 'Account type: ' . $accountDetails->type . "\n";
-echo $result->accountDetails->creditRemaining . " credits remaining\n";
-
-// Send messages using rotary
-echo "\n** Send Messages using rotary\n";
-echo "Sending '$message' to " . implode(', ', $recipients) . "\n";
-
-// Example of sending a message
-$response = $soap->sendMessages($recipients, $message);
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
 
-// Send messages using a source number
-echo "\n** Send Messages using a source number and setting Message id.\n";
-echo "Sending '$message' to " . implode(', ', $recipients) . " with sourceNumber: $origin and messageId: $messageIds[0]\n";
-
-
-// Set this to true to request a DR, please note this will incur an additional charge
-$sequenceId = 1239812;
-$deliveryReceipt = false;
-if ($deliveryReceipt){
-    echo "Request delivery Receipt.\n";
-}
-
-// Example of sending a message with a Delivery Receipt request and setting the sequenceId (1239812) and messageId (24)
-$response = $soap->sendMessages($recipients, $message, null, $origin, $deliveryReceipt, $sequenceId, $messageIds);
-$result   = $response->getResult();
-echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
-
-// Example of sending a message at a scheduled date and time
-/*echo "\n** Schedule A Message\n";
-echo "Scheduling to send '$message' on ".date('l jS \of F Y h:iA',$oneMinuteInTheFuture)." to " . implode(', ', $recipients) . "\n";
-// This is an example of the date format $scheduled = "2016-07-28T17:10:00";
+// Example sending a more complex request
+// - scheduled
+// - source number
+// - delivery report
+// - sequence number
+// - message ids
+echo "\nScheduling to send message on ".date('l jS \of F Y h:iA',$oneMinuteInTheFuture)." to " . implode(', ', $recipients) . "\n";
 $scheduled = date('Y-m-j\TG:i:s',$oneMinuteInTheFuture);
-$response = $soap->sendMessages($recipients, $message, $scheduled, $origin);
+$sequenceNumber = 10;
+$response = $soap->sendMessages($recipients, "messagemedia-php: scheduled message", $scheduled, $origin, TRUE, $messageIds);
+if ($response instanceof SoapFault) {
+	exit ( 'Error: ' . $response->getMessage () );
+}
 $result   = $response->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
-*/
-
-// Get blocked numbers
-// echo "\n** Get Blocked Numbers\n";
-$response   = $soap->getBlockedNumbers();
-$result     = $response->getResult();
-
-if (array_key_exists('recipients', $result)) {
-    $recipients = $result->recipients->recipient;
-    if (isset($recipients)) {
-        foreach ($recipients as $recipient) {
-            echo 'The number ' . $recipient . " is blocked\n";
-        }
-    } else {
-         echo "No numbers in your blocked list\n";
-    }
-}
