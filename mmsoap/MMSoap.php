@@ -163,4 +163,42 @@ class MMSoap {
     	$request = new StructCheckReportsRequestType($this->authentication, $body);
     	return $this->serviceCheck->checkReports($request);
     }
+
+    /**
+     * Confirm replies.
+     * @param $maximumReplies the amount of replies to receive, defaults to 100 (optional)
+     * @return StructCheckRepliesResponseType
+     */
+    public function confirmReplies(array $replies) {
+        $body = new StructConfirmRepliesBodyType($this->stringNumberArrayToConfirmItemType($replies));
+        $request = new StructConfirmRepliesRequestType($this->authentication, $body);
+        return $this->serviceConfirm->confirmReplies($request);
+    }
+
+    private function stringNumberArrayToConfirmItemType(array $stringNumberArray) {
+        $result = array();
+        foreach ($stringNumberArray as $each) {
+            $result[] = new StructConfirmItemType($each);
+        }
+        return new StructConfirmReplyListType($result);
+    }
+
+    /**
+     * Confirm delivery reports.
+     * @param $maximumReports the amount of reports to receive, defaults to 100 (optional)
+     * @return StructCheckReportsResponseType
+     */
+    public function confirmReports(array $replies) {
+        $body = new StructConfirmReportsBodyType($this->stringNumberArrayToConfirmReportItemType($replies));
+        $request = new StructConfirmReportsRequestType($this->authentication, $body);
+        return $this->serviceConfirm->confirmReports($request);
+    }
+
+    private function stringNumberArrayToConfirmReportItemType(array $stringNumberArray) {
+        $result = array();
+        foreach ($stringNumberArray as $each) {
+            $result[] = new StructConfirmItemType($each);
+        }
+        return new StructConfirmReportListType($result);
+    }
 }

@@ -38,6 +38,9 @@ class MMSoapClient extends SoapClient {
         $request = $dom->saveXML();
 
         $response = parent::__doRequest($request, $location, $action, $version);
+        // fix & bug which causes the following warning;
+        // PHP Warning:  DOMDocument::createElement(): unterminated entity reference 
+        $response = str_replace('&', '&amp;', $response);
         $response = $this->reJig($response);
 
         return $response;
