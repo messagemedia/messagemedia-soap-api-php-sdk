@@ -1,0 +1,11 @@
+{
+    "name": "messagemedia/messagemedia-php",
+    "description": "MessageMedia SOAP API for PHP",
+    "keywords": ["MessageMedia", "MessgeMedia PHP SOAP API"],
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/messagemedia/messagemedia-php.git"
+        }
+    ]
+}
