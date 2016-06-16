@@ -46,8 +46,8 @@ class MMSoap {
      * @param $message     The message
      * @param $scheduled   When the message should be scheduled for, null = now
      * @param $origin      Origin phone number that the message will come from
-     *                     if no origin number is set(null), the messagemedia rotary 
-     *                     will be used so that message replies are correctly routed 
+     *                     if no origin number is set(null), the messagemedia rotary
+     *                     will be used so that message replies are correctly routed
      *
      * @return StructSendMessagesResponseType
      */
@@ -61,18 +61,30 @@ class MMSoap {
     /**
      * Send a single message to multiple recipients
      *
-     * @param $recipients  An array of the recipient phone numbers
-     * @param $message     The message
-     * @param $scheduled   When the message should be scheduled for, null = now
-     * @param $origin      Origin phone number that the message will come from
-     *                     if no origin number is set(null), the messagemedia rotary 
-     *                     will be used so that message replies are correctly routed 
-     * @param $deliveryReport   When set to true, this will request a receipt as to whether
-     *                          the message was delivered or not to the gateway.
-     * @param $sequenceNumber   This is the messageId associated to a batch message.
+     * @param array     $recipients  An array of the recipient phone numbers
+     * @param string    $message     The message
+     * @param dateTime  $scheduled   When the message should be scheduled for, null = now
+     * @param string    $origin      Origin phone number that the message will come from
+     *                               if no origin number is set(null), the messagemedia rotary
+     *                               will be used so that message replies are correctly routed
+     * @param boolean   $deliveryReport   When set to true, this will request a receipt as to whether
+     *                                    the message was delivered or not to the gateway.
+     * @param integer   $sequenceNumber   This is the messageId associated to a batch message.
+     * @param array     $messageIds       The Message UIDs
+     * @param string    $sendMode         This attribute specifies a 'send mode' to be used to send the
+     *                                    messages. Please see MessageMedia user-guide PDF for available options.
      * @return StructSendMessagesResponseType
      */
-    public function sendMessages($recipients, $message, $scheduled=null, $origin=null, $deliveryReport=false, $sequenceNumber=0, $messageIds=array()) {
+    public function sendMessages(
+        $recipients,
+        $message,
+        $scheduled = null,
+        $origin = null,
+        $deliveryReport = false,
+        $sequenceNumber = 0,
+        $messageIds = array(),
+        $sendMode = 'default'
+    ) {
         $recipientsStruct = array();
 
         for ($i=0; $i<sizeof($recipients); $i++) {
@@ -92,7 +104,7 @@ class MMSoap {
             $sequenceNumber
         ));
 
-        $messages    = new StructMessageListType($msgList);
+        $messages    = new StructMessageListType($msgList, $sendMode);
         $requestBody = new StructSendMessagesBodyType($messages);
         $sendRequest = new StructSendMessagesRequestType($this->authentication, $requestBody);
 
@@ -101,8 +113,8 @@ class MMSoap {
 
     /**
     * Get the blocked numbers for the customer/account
-    * 
-     * @return Array    Array of blocked numbers 
+    *
+     * @return Array    Array of blocked numbers
     */
     public function getBlockedNumbers() {
         $requestBody = new StructGetBlockedNumbersBodyType(5);
@@ -152,7 +164,7 @@ class MMSoap {
         $request = new StructCheckRepliesRequestType($this->authentication, $body);
         return $this->serviceCheck->checkReplies($request);
     }
-    
+
     /**
      * Check for delivery reports.
      * @param $maximumReports the amount of reports to receive, defaults to 100 (optional)
