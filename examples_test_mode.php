@@ -29,9 +29,6 @@ $recipients = array($recipient);
 $messageIds = array('24');
 $origin     =       "+61491570157";
 
-// for scheduled messages lets schedule a message 1 minte in the future
-$oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , date("d"), date("Y"));
-
 // Create new MMSoap class
 $soap = new MMSoap($username, $password, $options);
 
