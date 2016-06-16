@@ -21,15 +21,6 @@ require('mmsoap/MMSoap.php');
 
 // get credentials
 require('credentials.php');
-/*
-// if you don't want to use the credetials import, just use the below variables 
-// Set up account details
-$username = 'YourUserName001';
-$password = 'y0urpassw0rd';
-
-// http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
-$recipient = "+61491570156";
-*/
 
 // Set up sendMessage parameters
 // http://www.acma.gov.au/Citizen/Consumer-info/All-about-numbers/Special-numbers/fictitious-numbers-for-radio-film-and-television-i-acma
@@ -44,29 +35,32 @@ $oneMinuteInTheFuture = mktime(date("H"), date("i")+1, date("s"), date("m")  , d
 // Create new MMSoap class
 $soap = new MMSoap($username, $password, $options);
 
-// Send a simple message
-$recipient = $recipients[0];
-echo "\n** Send Messages\n";
-echo "Sending message to $recipient\n";
-$response = $soap->sendMessage($recipient, "messagemedia-php: simple message");
-if ($response instanceof SoapFault) {
-	exit ( 'Error: ' . $response->getMessage () );
-}
-$result   = $response->getResult();
-echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
-
 // Example sending a more complex request
 // - scheduled
 // - source number
 // - delivery report
 // - sequence number
 // - message ids
-echo "\nScheduling to send message on ".date('l jS \of F Y h:iA',$oneMinuteInTheFuture)." to " . implode(', ', $recipients) . "\n";
-$scheduled = date('Y-m-j\TG:i:s',$oneMinuteInTheFuture);
+// - message send mode
+echo "\nTesting sending messages to " . implode(', ', $recipients) . "\n";
 $sequenceNumber = 10;
-$response = $soap->sendMessages($recipients, "messagemedia-php: scheduled message", $scheduled, $origin, TRUE, $sequenceNumber, $messageIds);
-if ($response instanceof SoapFault) {
-	exit ( 'Error: ' . $response->getMessage () );
+$response1 = $soap->sendMessages($recipients, "messagemedia-php: drop random", null, $origin, TRUE, $sequenceNumber, $messageIds, 'dropAll');
+$sequenceNumber++;
+$response2 = $soap->sendMessages($recipients, "messagemedia-php: dropAllWithErrors", null, $origin, TRUE, $sequenceNumber, $messageIds, 'dropAllWithErrors');
+$sequenceNumber++;
+$response3 = $soap->sendMessages($recipients, "messagemedia-php: dropAllWithSuccess", null, $origin, TRUE, $sequenceNumber, $messageIds, 'dropAllWithSuccess');
+if ($response1 instanceof SoapFault) {
+	exit ( 'Error: ' . $response1->getMessage () );
 }
-$result   = $response->getResult();
+$result   = $response1->getResult();
+echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+if ($response2 instanceof SoapFault) {
+	exit ( 'Error: ' . $response2->getMessage () );
+}
+$result   = $response2->getResult();
+echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
+if ($response3 instanceof SoapFault) {
+	exit ( 'Error: ' . $response3->getMessage () );
+}
+$result   = $response3->getResult();
 echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result->failed . " failed\n";
