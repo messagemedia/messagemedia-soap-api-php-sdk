@@ -62,7 +62,7 @@ echo $result->sent . ' sent / ' . $result->scheduled . ' scheduled / ' . $result
 // - sequence number
 // - message ids
 echo "\nScheduling to send message on ".date('l jS \of F Y h:iA',$oneMinuteInTheFuture)." to " . implode(', ', $recipients) . "\n";
-$scheduled = date('Y-m-j\TG:i:s',$oneMinuteInTheFuture);
+$scheduled = date('Y-m-d\TG:i:s',$oneMinuteInTheFuture);
 $sequenceNumber = 10;
 $response = $soap->sendMessages($recipients, "messagemedia-php: scheduled message", $scheduled, $origin, TRUE, $sequenceNumber, $messageIds);
 if ($response instanceof SoapFault) {
